@@ -12,7 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   value_localization_core:
-    path: ../value_localization_core
+    git:
+      url: https://github.com/ValueNotify666/value_localization_core.git
 
 dev_dependencies:
   flutter_test:
