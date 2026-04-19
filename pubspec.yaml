@@ -3,8 +3,9 @@ description: >
   Flutter 本地化适配层，支持从 Assets 或内存 Map 加载多语言数据。
   Flutter localization adapter supporting both Assets and in-memory Map data sources.
 version: 0.0.2
-homepage: https://github.com/ValueNotify666/value_localization_core.git
-publish_to: none
+homepage: https://github.com/ValueNotify666/flutter_value_localization
+repository: https://github.com/ValueNotify666/flutter_value_localization.git
+issue_tracker: https://github.com/ValueNotify666/flutter_value_localization/issues
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
