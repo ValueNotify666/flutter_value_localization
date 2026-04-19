@@ -194,11 +194,10 @@ packages:
   value_localization_core:
     dependency: transitive
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: d8cc1654c5ccec25d7123322ce54bb8f2fbdee5c
-      url: "https://github.com/ValueNotify666/value_localization_core.git"
-    source: git
+      name: value_localization_core
+      sha256: c1885f186fa027aaa6b9c7375eac617534a663e22499f6aa3a985c7c57aacfda
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.0"
   vector_math:
     dependency: transitive

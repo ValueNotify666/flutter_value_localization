@@ -56,6 +56,7 @@ class ValueLocalization {
 
   /// 从 Map 数据源初始化（适用于 Hive 等本地存储）
   /// [data] 格式: { "app_zh": { "key": "value" }, "app_en": { "key": "value" } }
+  /// 支持简写 langCode: 'zh_cn' 会自动匹配 'app_zh_cn'
   static Future<void> initFromMap({
     required String langCode,
     required Map<String, Map<String, String>> data,
@@ -70,9 +71,24 @@ class ValueLocalization {
     }
 
     final logger = openLog ? const _PrintLocalizationLogger() : null;
+    
+    // 从 data 自动注册所有可用语言
+    final registry = LangRegistry();
+    for (final key in data.keys) {
+      // 注册带 app_ 前缀的完整 key
+      registry.registerPath(key, 'memory:$key');
+      
+      // 同时注册简写形式 (app_zh_cn -> zh_cn)
+      if (key.startsWith('app_')) {
+        final shortKey = key.substring(4); // 去掉 'app_' 前缀
+        registry.registerPath(shortKey, 'memory:$key');
+      }
+    }
+    
     final core = ValueLocalizationCore(
       source: MapLocalizationSource(data),
       logger: logger,
+      langRegistry: registry, // 传入注册好的 registry
     );
 
     await core.init(langCode: langCode);

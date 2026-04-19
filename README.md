@@ -37,9 +37,7 @@
 
 ```yaml
 dependencies:
-  flutter_value_localization:
-    git:
-      url: https://github.com/ValueNotify666/flutter_value_localization.git
+  flutter_value_localization: ^0.0.3
 ```
 
 > 依赖核心库 / Core dependency: [value_localization_core](https://github.com/ValueNotify666/value_localization_core.git)
@@ -172,6 +170,25 @@ await ValueLocalization.initFromMap(
 
 > **注意 / Note**: 数据格式要求 `app_<langCode>` 作为 key，如 `app_en`、`app_zh_cn`。<br>
 > *Data format requires `app_<langCode>` as key, e.g., `app_en`, `app_zh_cn`.*
+
+#### 4. 从 API 直接初始化（无需类型转换）/ Initialize from API (No Type Conversion)
+
+```dart
+// 从远程 API 获取翻译数据 / Fetch translations from remote API
+final response = await http.get(Uri.parse('https://api.example.com/translations'));
+final data = jsonDecode(response.body);  // 原始 JSON，无需转换 / Raw JSON, no conversion needed
+
+// 直接初始化，自动注册所有语言 / Initialize directly, auto-registers all languages
+await ValueLocalization.initFromMap(
+  langCode: 'zh_cn',  // 默认语言 / Default language
+  data: data,         // 支持 Map<dynamic, dynamic> / Supports Map<dynamic, dynamic>
+  openLog: true,
+);
+
+// 切换语言（支持简写）/ Switch language (shorthand supported)
+await ValueLocalization.set('en');      // 自动匹配 app_en / Auto-matches app_en
+await ValueLocalization.set('zh_cn');   // 自动匹配 app_zh_cn / Auto-matches app_zh_cn
+```
 
 ---
 

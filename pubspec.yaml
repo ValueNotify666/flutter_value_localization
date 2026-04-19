@@ -2,7 +2,7 @@ name: flutter_value_localization
 description: >
   Flutter 本地化适配层，支持从 Assets 或内存 Map 加载多语言数据。
   Flutter localization adapter supporting both Assets and in-memory Map data sources.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/ValueNotify666/flutter_value_localization
 repository: https://github.com/ValueNotify666/flutter_value_localization.git
 issue_tracker: https://github.com/ValueNotify666/flutter_value_localization/issues
@@ -14,9 +14,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  value_localization_core:
-    git:
-      url: https://github.com/ValueNotify666/value_localization_core.git
+  value_localization_core: ^1.0.0
 
 dev_dependencies:
   flutter_test:
