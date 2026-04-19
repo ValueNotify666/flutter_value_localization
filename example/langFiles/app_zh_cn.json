@@ -1,0 +1,7 @@
+{
+  "appname": "Nice Player",
+  "welcome": "欢迎使用 {appName}！",
+  "today": "今天是{year}年{month}月{day}日",
+  "greeting": "你好，{name}！",
+  "items_count": "你有 {count} 个项目"
+}

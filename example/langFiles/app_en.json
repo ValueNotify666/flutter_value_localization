@@ -1,0 +1,7 @@
+{
+  "appname": "Nice Player",
+  "welcome": "Welcome to {appName}!",
+  "today": "Today is {month}/{day}/{year}",
+  "greeting": "Hello, {name}!",
+  "items_count": "You have {count} items"
+}

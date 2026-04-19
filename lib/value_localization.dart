@@ -6,6 +6,7 @@ import 'package:value_localization_core/value_localization_core.dart';
 
 import 'flutter_asset_localization_source.dart';
 import 'localization_value_notifier.dart';
+import 'map_localization_source.dart';
 import 'system_lang_mapper.dart';
 import 'system_locale_controller.dart';
 
@@ -30,6 +31,7 @@ class ValueLocalization {
 
   static bool get isInitialized => _core?.isInitialized ?? false;
 
+  /// 从 Flutter assets 初始化
   static Future<void> init({
     required String langCode,
     bool openLog = false,
@@ -45,6 +47,31 @@ class ValueLocalization {
     final logger = openLog ? const _PrintLocalizationLogger() : null;
     final core = ValueLocalizationCore(
       source: const FlutterAssetLocalizationSource(),
+      logger: logger,
+    );
+
+    await core.init(langCode: langCode);
+    _bindCore(core);
+  }
+
+  /// 从 Map 数据源初始化（适用于 Hive 等本地存储）
+  /// [data] 格式: { "app_zh": { "key": "value" }, "app_en": { "key": "value" } }
+  static Future<void> initFromMap({
+    required String langCode,
+    required Map<String, Map<String, String>> data,
+    bool openLog = false,
+  }) async {
+    if (_core != null) {
+      if (_core!.isInitialized) {
+        return;
+      }
+      await _core!.init(langCode: langCode);
+      return;
+    }
+
+    final logger = openLog ? const _PrintLocalizationLogger() : null;
+    final core = ValueLocalizationCore(
+      source: MapLocalizationSource(data),
       logger: logger,
     );
 
